@@ -27,14 +27,14 @@ const GameControls: React.FC<GameControlsProps> = ({
 
     const winnerContent = (
         <View>
-            <Text>{winner}</Text>
-            <Button color="#fb3c3c" title="Restart" onPress={onRestart} />
+            <Text style={styles.winnerText}>{winner}</Text>
+            <Button color="#f8b91c" title="Restart" onPress={onRestart} />
         </View>
     );
 
     const gameStartButtonsContent = (
         <View style={styles.gameStartButtonsContainer}>
-            <Button color="#39f92c" title="Start Game!" onPress={onStartGame} />
+            <Button color="#29d5ac" title="Start Game!" onPress={onStartGame} />
             <View style={styles.switcherContainer}>
                 <Text style={styles.switcherText}>Computer first</Text>
 
@@ -48,7 +48,7 @@ const GameControls: React.FC<GameControlsProps> = ({
             {[1, 2, 3].map((drawCount) => (
                 <Button
                     key={drawCount}
-                    color="#ffa500"
+                    color="#f8b91c"
                     title={`Draw ${drawCount}`}
                     onPress={() => {
                         handleMatchesDraw(drawCount);
@@ -89,5 +89,10 @@ const styles = StyleSheet.create({
     },
     switcherText: {
         fontSize: 17,
+    },
+    winnerText: {
+        fontSize: 15,
+        textAlign: "center",
+        marginBottom: 10,
     },
 });

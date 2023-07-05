@@ -14,25 +14,18 @@ const Main: React.FC = () => {
     const [gameStarted, setGameStarted] = useState<boolean>(false);
 
     useEffect(() => {
-        if (gameStarted && !isPlayerTurn && matchesLeft > 0) {
+        if (matchesLeft === 0) {
+            getWinner();
+        } else if (gameStarted && !isPlayerTurn && matchesLeft > 0) {
             const computerDraw = strategicMove(matchesLeft);
-            const delay = Math.floor(Math.random() * 1000) + 500; // Random delay between 500ms and 1500ms
 
             const timeoutId = setTimeout(() => {
                 handleMatchesDraw(computerDraw);
-            }, delay);
+            }, 1500);
 
             return () => clearTimeout(timeoutId);
         }
     }, [isPlayerTurn, matchesLeft, gameStarted]);
-
-    useEffect(() => {
-        if (matchesLeft === 0) {
-            getWinner();
-        } else if (isComputerFirst && !isPlayerTurn) {
-            handleComputerTurn();
-        }
-    }, [isPlayerTurn, matchesLeft, isComputerFirst]);
 
     const handleStartGame = (): void => {
         setGameStarted(true);
@@ -66,11 +59,10 @@ const Main: React.FC = () => {
 
     const handleComputerTurn = (): void => {
         const computerDraw = strategicMove(matchesLeft);
-        const delay = Math.floor(Math.random() * 1000) + 500; //Random delay for imitation of the processing
 
         setTimeout(() => {
             handleMatchesDraw(computerDraw);
-        }, delay);
+        }, 1500);
     };
 
     const strategicMove = (matchesLeft: number): number => {
